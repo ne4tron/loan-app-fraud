@@ -1,29 +1,119 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Admin Panel</title>
-</head>
-<body>
-  <h1>Admin Panel</h1>
-  <p>Enter admin token (X-Admin-Token header) to approve loans.</p>
-  <label>Admin Token: <input id="token"></label><br>
-  <label>Loan ID to approve: <input id="loan_id"></label><br>
-  <button id="approve">Approve</button>
-  <pre id="out"></pre>
+# Contributing to CyberNeutron Loan Fraud CTF
 
-<script>
-document.getElementById('approve').onclick = async function () {
-  const token = document.getElementById('token').value;
-  const loan_id = document.getElementById('loan_id').value;
-  const res = await fetch('/admin/approve', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'X-Admin-Token': token},
-    body: JSON.stringify({loan_id}),
-  });
-  const j = await res.json();
-  document.getElementById('out').textContent = JSON.stringify(j, null, 2);
-};
-</script>
-</body>
-</html>
+Thank you for your interest in contributing to this educational CTF project! We welcome contributions from the community.
+
+## How to Contribute
+
+### Reporting Bugs
+
+If you find a bug (not an intentional vulnerability), please open an issue with:
+- A clear description of the problem
+- Steps to reproduce
+- Expected vs actual behavior
+- Browser and OS information
+- Screenshots if applicable
+
+### Suggesting Enhancements
+
+We welcome suggestions for:
+- New challenge stages
+- Improved hints
+- Better educational content
+- UI/UX improvements
+- Additional security concepts to cover
+
+### Pull Requests
+
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. **Make your changes**
+   - Follow the existing code style
+   - Add comments for complex logic
+   - Update documentation if needed
+
+4. **Test your changes**
+   - Ensure all stages still work correctly
+   - Test on multiple browsers
+   - Verify responsive design
+
+5. **Commit your changes**
+   ```bash
+   git commit -m "Add: brief description of changes"
+   ```
+
+6. **Push to your fork**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+7. **Open a Pull Request**
+   - Provide a clear description of changes
+   - Reference any related issues
+   - Explain the educational value if adding new content
+
+## Code Style Guidelines
+
+### TypeScript/React
+- Use functional components with hooks
+- Use TypeScript types for all props and state
+- Follow React best practices
+- Keep components focused and reusable
+
+### Styling
+- Use Tailwind CSS utility classes
+- Follow the existing color scheme (cyber theme)
+- Ensure responsive design (mobile-first)
+- Use shadcn/ui components when possible
+
+### File Organization
+- Place CTF-specific components in `src/components/ctf/`
+- Keep utility functions in `src/lib/ctf-utils.ts`
+- Use custom hooks in `src/hooks/`
+- Create new pages in `src/pages/`
+
+## Educational Content Guidelines
+
+When adding or modifying educational content:
+
+1. **Accuracy** - Ensure security concepts are technically accurate
+2. **Clarity** - Explain concepts in beginner-friendly language
+3. **Ethics** - Always emphasize ethical hacking principles
+4. **Practicality** - Focus on real-world applicable knowledge
+
+## Adding New Stages
+
+If you want to add a new challenge stage:
+
+1. Update `src/lib/ctf-utils.ts`:
+   - Add new flag to `FLAGS` object
+   - Add hints to `HINTS` object
+   - Implement stage logic
+
+2. Update `src/components/ctf/StageCard.tsx`:
+   - Add stage information
+   - Define objective and vulnerability
+
+3. Update `src/components/ctf/LoanForm.tsx`:
+   - Add stage-specific form handling
+
+4. Update documentation:
+   - Add stage description to README
+   - Update total stage count
+
+## Questions?
+
+Feel free to open an issue for any questions about contributing!
+
+## Code of Conduct
+
+- Be respectful and inclusive
+- Focus on constructive feedback
+- Help others learn
+- Follow ethical hacking principles
+- No malicious code or actual exploits
+
+Thank you for helping make this educational resource better! 🎉
