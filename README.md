@@ -1,26 +1,195 @@
-# Loan API CTF (full package)
-Files included:
-- app.py: Flask backend with basic and hard stages, admin panel, and a simulated leak file in /backup/admin_token.bak
-- client.html: vulnerable client
-- admin.html: admin panel UI that calls admin endpoints
-- requirements.txt, Dockerfile, docker-compose.yml
-- ctfd_submit.py: helper to submit flags to an external scoreboard (configure URL)
-- local_grader.py: polls the local app to display solves
-- static/admin_token.bak: simulated accidental backup containing ADMIN_TOKEN
+CyberNeutron Loan Fraud CTF
+A multi-stage web exploitation challenge focused on real-world loan fraud abuse techniques.
 
-How to run locally:
-1. python -m venv venv && source venv/bin/activate
-2. pip install -r requirements.txt
-3. export CTF_FLAG="CTF{your_flag_here}"
-   export CTF_FLAG_HARD="CTF{your_hard_flag_here}"
-   export ADMIN_TOKEN="some_secret_token"
-4. python app.py
-5. Visit http://localhost:5000 to use the client, /admin for admin panel, and /backup/admin_token.bak to find the token (intentionally exposed for the challenge).
-6. Use local_grader.py to watch solves.
+CyberNeutron Loan Fraud CTF is a fully interactive, progressive web security challenge where players exploit a fictional loan application system.
+The CTF is designed for training beginners–intermediate cybersecurity learners using realistic attack vectors, browser analysis, and Burp Suite interception.
 
-Challenge design:
-- Basic stage: exploit API logic manipulation by sending approved=true in /apply then access /flag?username=alice
-- Hard stage: must create a loan with amount >= 1000000 and interest_rate 0, then get it approved by admin (requires ADMIN_TOKEN). The simulated accidental backup at /backup/admin_token.bak leaks the token.
-- Score integration: use ctfd_submit.py to POST flags to your scoreboard; or run local_grader.py to see solves locally.
+🚀 Overview
 
-Note: This package intentionally includes vulnerabilities for educational CTF use only.
+Players must exploit vulnerabilities in a loan application platform used by a fictional fintech service.
+Each stage introduces a more advanced security flaw—building a full exploitation chain in the final stage.
+
+The CTF includes:
+
+✔️ Multi-stage progression
+✔️ Visual progress tracker
+✔️ Real-time validation
+✔️ Flag system
+✔️ 3-level hint system per stage
+✔️ Professional cyber-themed UI
+
+🧩 Stages Breakdown
+🔹 Stage 1 — Client-Side Manipulation
+
+Players inspect and modify front-end code to bypass strict client-side validation.
+They learn about:
+
+Weak JavaScript-only security
+
+Manipulating DOM elements
+
+Browser dev tools exploitation
+
+Goal: Submit an application with invalid/ineligible values.
+Skill: Basic client-side tampering.
+
+🔹 Stage 2 — Hidden API Key Discovery
+
+Participants explore browser console logs, network panel, and front-end JS files to recover an exposed API key.
+
+They learn:
+
+Why embedding keys in the front-end is insecure
+
+How front-end frameworks leak sensitive info
+
+Using dev tools to extract API logic
+
+Goal: Obtain access to protected API routes.
+Skill: Client-side reconnaissance.
+
+🔹 Stage 3 — Checksum Bypass
+
+The platform includes a fake “security checksum” used to validate critical requests.
+Players reverse-engineer or bypass the client-side checksum algorithm.
+
+They learn:
+
+How checksums work
+
+Why client-side cryptography is weak
+
+Reverse engineering obfuscated JS
+
+Goal: Submit an altered payload accepted by backend.
+Skill: Understanding client-side pseudo security.
+
+🔹 Stage 4 — Full Exploit Chain
+
+The final stage requires players to combine:
+
+Form manipulation
+
+API key abuse
+
+Checksum forgery
+
+Backend logic exploitation
+
+Goal: Completely compromise the loan approval mechanism and extract the final flag.
+Skill: Multi-step exploit chaining.
+
+🛠️ Technical Features
+Frontend
+
+Dynamic progress tracker
+
+Animated UI elements
+
+Real-time failure and success feedback
+
+Progressive hints (3 per stage)
+
+Flag popup system
+
+Educational console messages
+
+Backend
+
+Stage-by-stage validation
+
+Intentional vulnerabilities
+
+Admin panel functionality
+
+Score tracking
+
+Secure flag issuing system
+
+Interception Ready
+
+The challenge is designed for use with:
+
+Burp Suite
+
+OWASP ZAP
+
+HTTP Replay Tools
+
+Players will analyze and exploit requests in real time.
+
+🎯 Learning Objectives
+
+By the end of the CTF, participants will understand:
+
+✔️ Why client-side security cannot be trusted
+✔️ API enumeration and key exposure
+✔️ How weak “checksums” and “tokens” can be manipulated
+✔️ How chained vulnerabilities can compromise a real system
+✔️ Safe design patterns in fintech security models
+📦 How to Play
+
+Visit the CyberNeutron Loan Fraud CTF website.
+
+Create or choose a username.
+
+Start at Stage 1; progress in order.
+
+Use browser dev tools + Burp Suite for analysis.
+
+Read hints when needed (three per stage).
+
+Capture flags and unlock the final badge.
+
+🌐 Deployment (Recommended)
+Frontend (Netlify)
+
+Upload these files:
+
+client.html
+admin.html
+assets/
+scripts/
+
+Backend (Render)
+
+Deploy with:
+
+uvicorn app:app --host 0.0.0.0 --port 10000
+
+
+Then update frontend API path:
+
+const API = "https://your-api.onrender.com";
+
+🏁 Flags
+
+Each stage awards a unique flag:
+
+FLAG{stage_1_bypassed}
+FLAG{stage_2_api_key_exposed}
+FLAG{stage_3_checksum_defeated}
+FLAG{stage_4_system_compromised}
+
+
+Final chain completion unlocks:
+
+FLAG{cyberneutron_master_of_loan_fraud_ctf}
+
+📚 Notes for Instructors / Event Hosts
+
+Recommended for students learning web exploitation
+
+Difficulty: Beginner → Intermediate
+
+Meets requirements for cybersecurity club workshops
+
+Designed to be solvable without prior scripting knowledge
+
+Ideal for teaching client-side vs server-side security
+
+👤 Credits
+
+CyberNeutron Loan Fraud CTF
+Developed for educational and ethical cybersecurity training.
+All vulnerabilities are intentional and safe for classroom or competition environments.
