@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Admin Panel</title>
+</head>
+<body>
+  <h1>Admin Panel</h1>
+  <p>Enter admin token (X-Admin-Token header) to approve loans.</p>
+  <label>Admin Token: <input id="token"></label><br>
+  <label>Loan ID to approve: <input id="loan_id"></label><br>
+  <button id="approve">Approve</button>
+  <pre id="out"></pre>
+
+<script>
+document.getElementById('approve').onclick = async function () {
+  const token = document.getElementById('token').value;
+  const loan_id = document.getElementById('loan_id').value;
+  const res = await fetch('/admin/approve', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'X-Admin-Token': token},
+    body: JSON.stringify({loan_id}),
+  });
+  const j = await res.json();
+  document.getElementById('out').textContent = JSON.stringify(j, null, 2);
+};
+</script>
+</body>
+</html>

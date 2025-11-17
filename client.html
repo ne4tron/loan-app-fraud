@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Loan App</title>
+</head>
+<body>
+  <h1>Loan Application (demo)</h1>
+  <label>Username: <input id="username" value="alice"></label><br>
+  <label>Amount: <input id="amount" value="10000"></label><br>
+  <label>Interest Rate: <input id="interest" value="12.5"></label><br>
+  <label>Approved: <input id="approved" type="checkbox"></label><br>
+  <button id="apply">Apply</button>
+  <pre id="out"></pre>
+
+<script>
+document.getElementById('apply').onclick = async function () {
+  const payload = {
+    username: document.getElementById('username').value,
+    amount: document.getElementById('amount').value,
+    interest_rate: document.getElementById('interest').value,
+    approved: document.getElementById('approved').checked
+  };
+  const res = await fetch('/apply', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload),
+  });
+  const j = await res.json();
+  document.getElementById('out').textContent = JSON.stringify(j, null, 2);
+};
+</script>
+</body>
+</html>

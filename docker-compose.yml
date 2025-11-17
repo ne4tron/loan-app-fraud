@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - CTF_FLAG=CTF{replace_me}
+      - CTF_FLAG_HARD=CTF{replace_me_hard}
+      - ADMIN_TOKEN=admintoken123
+    volumes:
+      - .:/app
